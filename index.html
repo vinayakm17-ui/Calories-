@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
@@ -294,6 +293,791 @@
                   class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
               </div>
               <div>
-                <label for="food-carbs" class="block text-xs font-semibold text-amber-600 dark:text-amber-400 mb-1">Carbs (g)</l
+                <label for="food-carbs" class="block text-xs font-semibold text-amber-600 dark:text-amber-400 mb-1">Carbs (g)</label>
+                <input type="number" id="food-carbs" min="0" step="0.1" placeholder="0"
+                  class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition" />
+              </div>
+              <div>
+                <label for="food-fats" class="block text-xs font-semibold text-rose-600 dark:text-rose-400 mb-1">Fats (g)</label>
+                <input type="number" id="food-fats" min="0" step="0.1" placeholder="0"
+                  class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 transition" />
+              </div>
+              <div>
+                <label for="food-fiber" class="block text-xs font-semibold text-teal-600 dark:text-teal-400 mb-1">Fiber (g)</label>
+                <input type="number" id="food-fiber" min="0" step="0.1" placeholder="0"
+                  class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition" />
+              </div>
+            </div>
+
+            <button type="submit"
+              class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-semibold text-sm shadow-sm transition flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="M12 5v14"/>
+              </svg>
+              <span>Add to Log</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Quick-Add Library -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm w-full">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2">
+              <div class="p-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
+              <h2 class="text-base font-bold">Quick-Add Library</h2>
+            </div>
+
+            <!-- Target Meal Selector for Quick Add -->
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs text-slate-500 dark:text-slate-400">Log to:</span>
+              <select id="quick-add-meal"
+                class="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snacks">Snacks</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Search & Filter -->
+          <div class="relative mb-3">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input type="text" id="quick-search" placeholder="Search Idli, Dosa, Paneer, Chicken..."
+              class="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition" />
+          </div>
+
+          <!-- Category Pills -->
+          <div id="category-filters" class="flex flex-wrap gap-1.5 pb-2 mb-2">
+            <button type="button" data-cat="All" class="cat-btn active px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white">All</button>
+            <button type="button" data-cat="Indian" class="cat-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Indian Staples</button>
+            <button type="button" data-cat="Protein" class="cat-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">High Protein</button>
+            <button type="button" data-cat="Essentials" class="cat-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Everyday</button>
+          </div>
+
+          <!-- Quick Add Items List -->
+          <div id="quick-add-list" class="space-y-2.5 max-h-[380px] overflow-y-auto pr-0.5">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Daily Meal Logs -->
+      <div class="lg:col-span-7 space-y-4 w-full min-w-0">
+        <div class="flex items-center justify-between px-1">
+          <h2 class="text-base font-bold">Daily Food Diary</h2>
+          <span id="total-items-badge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+            0 items logged
+          </span>
+        </div>
+
+        <!-- Meal Sections Container -->
+        <div id="meals-container" class="space-y-4">
+          <!-- Breakfast, Lunch, Dinner, Snacks cards rendered via JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Goals Customization Modal -->
+  <div id="goals-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-xl my-auto">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2.5">
+          <div class="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold">Set Daily Nutrition Goals</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Customize your calorie, macro & fiber targets</p>
+          </div>
+        </div>
+        <button id="close-goals-btn" type="button" aria-label="Close modal" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <form id="goals-form" class="space-y-4">
+        <div>
+          <label for="goal-calories-input" class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Daily Calorie Target (kcal)</label>
+          <input type="number" id="goal-calories-input" required min="500" max="10000" step="10"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-base font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label for="goal-protein-input" class="block text-xs font-semibold text-blue-600 dark:text-blue-400 mb-1">Protein (g)</label>
+            <input type="number" id="goal-protein-input" required min="10" max="600"
+              class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label for="goal-carbs-input" class="block text-xs font-semibold text-amber-600 dark:text-amber-400 mb-1">Carbohydrates (g)</label>
+            <input type="number" id="goal-carbs-input" required min="10" max="1000"
+              class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500" />
+          </div>
+          <div>
+            <label for="goal-fats-input" class="block text-xs font-semibold text-rose-600 dark:text-rose-400 mb-1">Fats (g)</label>
+            <input type="number" id="goal-fats-input" required min="10" max="400"
+              class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-rose-500" />
+          </div>
+          <div>
+            <label for="goal-fiber-input" class="block text-xs font-semibold text-teal-600 dark:text-teal-400 mb-1">Dietary Fiber (g)</label>
+            <input type="number" id="goal-fiber-input" required min="5" max="150"
+              class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-teal-500" />
+          </div>
+        </div>
+
+        <!-- Preset Goal Buttons -->
+        <div class="pt-1">
+          <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Quick Presets</p>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" data-preset="cut" class="preset-btn py-2 px-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 text-xs font-medium text-center transition">
+              Fat Loss<br><span class="text-[11px] text-slate-400">1650 kcal • 28g fib</span>
+            </button>
+            <button type="button" data-preset="maintain" class="preset-btn py-2 px-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 text-xs font-medium text-center transition">
+              Balanced<br><span class="text-[11px] text-slate-400">2000 kcal • 30g fib</span>
+            </button>
+            <button type="button" data-preset="bulk" class="preset-btn py-2 px-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 text-xs font-medium text-center transition">
+              Muscle Gain<br><span class="text-[11px] text-slate-400">2600 kcal • 38g fib</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex gap-2.5 pt-2">
+          <button type="button" id="cancel-goals-btn" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold transition">
+            Cancel
+          </button>
+          <button type="submit" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm transition">
+            Save Goals
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-sm w-full p-6 border border-slate-200 dark:border-slate-800 shadow-xl">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="p-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/70 text-rose-600 dark:text-rose-400">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/>
+          </svg>
+        </div>
+        <h3 class="text-base font-bold">Clear Today's Entries?</h3>
+      </div>
+      <p id="confirm-modal-text" class="text-sm text-slate-600 dark:text-slate-400 mb-5">
+        This will remove all logged meals for the selected date. This action cannot be undone.
+      </p>
+      <div class="flex gap-2.5">
+        <button id="confirm-cancel-btn" type="button" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold transition">
+          Keep Entries
+        </button>
+        <button id="confirm-proceed-btn" type="button" class="flex-1 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold transition">
+          Clear All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. DATA & STATE INITIALIZATION
+    // =========================================================================
+    const STORAGE_KEYS = {
+      LOGS: 'nutripulse_logs_v1',
+      GOALS: 'nutripulse_goals_v1',
+      THEME: 'nutripulse_theme_v1'
+    };
+
+    const DEFAULT_GOALS = {
+      calories: 2000,
+      protein: 150,
+      carbs: 225,
+      fats: 65,
+      fiber: 30
+    };
+
+    const QUICK_ADD_FOODS = [
+      { id: 'idli', name: 'Idli (2 pcs)', calories: 116, protein: 4, carbs: 24, fats: 0.4, fiber: 1.8, category: 'Indian', defaultMeal: 'Breakfast' },
+      { id: 'dosa', name: 'Plain Dosa (1 medium)', calories: 168, protein: 4, carbs: 29, fats: 3.7, fiber: 1.5, category: 'Indian', defaultMeal: 'Breakfast' },
+      { id: 'masala-dosa', name: 'Masala Dosa (1 medium)', calories: 285, protein: 6, carbs: 42, fats: 10, fiber: 3.6, category: 'Indian', defaultMeal: 'Breakfast' },
+      { id: 'sambar', name: 'Sambar (1 bowl / 150ml)', calories: 110, protein: 5, carbs: 16, fats: 2.5, fiber: 4.2, category: 'Indian', defaultMeal: 'Breakfast' },
+      { id: 'roti', name: 'Whole Wheat Roti / Chapati (1 pc)', calories: 104, protein: 3.5, carbs: 20, fats: 1.2, fiber: 2.8, category: 'Indian', defaultMeal: 'Lunch' },
+      { id: 'dal', name: 'Dal Tadka (1 bowl / 150g)', calories: 180, protein: 9, carbs: 22, fats: 6, fiber: 5.5, category: 'Indian', defaultMeal: 'Lunch' },
+      { id: 'paneer', name: 'Paneer (100g)', calories: 265, protein: 18, carbs: 3.5, fats: 20, fiber: 0, category: 'Indian', defaultMeal: 'Dinner' },
+      { id: 'rice', name: 'Steamed White Rice (1 cup / 150g)', calories: 195, protein: 4, carbs: 42, fats: 0.4, fiber: 0.6, category: 'Indian', defaultMeal: 'Lunch' },
+      { id: 'poha', name: 'Kanda Poha (1 plate)', calories: 250, protein: 5, carbs: 44, fats: 6, fiber: 3.2, category: 'Indian', defaultMeal: 'Breakfast' },
+      { id: 'chicken', name: 'Grilled Chicken Breast (150g)', calories: 248, protein: 46, carbs: 0, fats: 5.4, fiber: 0, category: 'Protein', defaultMeal: 'Dinner' },
+      { id: 'eggs', name: 'Boiled Eggs (2 large)', calories: 155, protein: 12.6, carbs: 1.1, fats: 10.6, fiber: 0, category: 'Protein', defaultMeal: 'Breakfast' },
+      { id: 'whey', name: 'Whey Protein Scoop (30g)', calories: 120, protein: 24, carbs: 3, fats: 1.5, fiber: 0.5, category: 'Protein', defaultMeal: 'Snacks' },
+      { id: 'curd', name: 'Plain Curd / Dahi (1 cup / 150g)', calories: 98, protein: 5.5, carbs: 7.5, fats: 4.8, fiber: 0, category: 'Protein', defaultMeal: 'Lunch' },
+      { id: 'banana', name: 'Banana (1 medium)', calories: 105, protein: 1.3, carbs: 27, fats: 0.4, fiber: 3.1, category: 'Essentials', defaultMeal: 'Snacks' },
+      { id: 'oats', name: 'Rolled Oats (50g dry)', calories: 190, protein: 6.5, carbs: 34, fats: 3.5, fiber: 5.0, category: 'Essentials', defaultMeal: 'Breakfast' },
+      { id: 'almonds', name: 'Almonds (10 pcs / 14g)', calories: 82, protein: 3, carbs: 3, fats: 7, fiber: 1.8, category: 'Essentials', defaultMeal: 'Snacks' },
+      { id: 'peanut-butter', name: 'Peanut Butter (1 tbsp / 16g)', calories: 94, protein: 4, carbs: 3.2, fats: 8, fiber: 1.1, category: 'Essentials', defaultMeal: 'Snacks' }
+    ];
+
+    const MEAL_ICONS = {
+      Breakfast: '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 6 4-4 4 4"/><path d="M16 18a4 4 0 0 0-8 0"/></svg>',
+      Lunch: '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>',
+      Dinner: '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
+      Snacks: '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>'
+    };
+
+    const MEAL_CONFIG = [
+      { name: 'Breakfast', accent: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-950/50' },
+      { name: 'Lunch', accent: 'text-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-950/50' },
+      { name: 'Dinner', accent: 'text-indigo-500', bg: 'bg-indigo-50 dark:bg-indigo-950/50' },
+      { name: 'Snacks', accent: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-950/50' }
+    ];
+
+    let state = {
+      selectedDateOffset: 0,
+      goals: { ...DEFAULT_GOALS },
+      logs: {},
+      activeCategory: 'All',
+      searchQuery: ''
+    };
+
+    // =========================================================================
+    // 2. UTILITY FUNCTIONS
+    // =========================================================================
+    function getDateKey(offset = 0) {
+      const d = new Date();
+      d.setDate(d.getDate() + offset);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function formatDateLabel(offset) {
+      if (offset === 0) return 'Today';
+      if (offset === -1) return 'Yesterday';
+      if (offset === 1) return 'Tomorrow';
+      const d = new Date();
+      d.setDate(d.getDate() + offset);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' });
+    }
+
+    function loadState() {
+      try {
+        const savedGoals = localStorage.getItem(STORAGE_KEYS.GOALS);
+        if (savedGoals) state.goals = { ...DEFAULT_GOALS, ...JSON.parse(savedGoals) };
+        if (typeof state.goals.fiber !== 'number' || isNaN(state.goals.fiber)) {
+          state.goals.fiber = DEFAULT_GOALS.fiber;
+        }
+
+        const savedLogs = localStorage.getItem(STORAGE_KEYS.LOGS);
+        if (savedLogs) state.logs = JSON.parse(savedLogs);
+
+        const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        updateThemeIcons();
+      } catch (err) {
+        console.error('Failed to load state from localStorage:', err);
+      }
+    }
+
+    function saveLogs() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.LOGS, JSON.stringify(state.logs));
+      } catch (err) {
+        showToast('Could not save entries to storage.', 'error');
+      }
+    }
+
+    function saveGoals() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.GOALS, JSON.stringify(state.goals));
+      } catch (err) {
+        showToast('Could not save goals to storage.', 'error');
+      }
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const bgClass = type === 'error'
+        ? 'bg-rose-600 text-white'
+        : 'bg-slate-900 dark:bg-slate-800 text-white border border-slate-700';
+
+      toast.className = `${bgClass} px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-medium flex items-center gap-2 transform translate-y-2 opacity-0 transition-all duration-300`;
+      toast.innerHTML = `
+        <span class="w-2 h-2 rounded-full ${type === 'error' ? 'bg-white' : 'bg-emerald-400'}"></span>
+        <span>${escapeHTML(message)}</span>
+      `;
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 2400);
+    }
+
+    function escapeHTML(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // =========================================================================
+    // 3. CORE CRUD OPERATIONS
+    // =========================================================================
+    function getCurrentEntries() {
+      const key = getDateKey(state.selectedDateOffset);
+      if (!state.logs[key]) state.logs[key] = [];
+      return state.logs[key];
+    }
+
+    function addFoodEntry({ name, meal, calories, protein, carbs, fats, fiber }) {
+      const key = getDateKey(state.selectedDateOffset);
+      if (!state.logs[key]) state.logs[key] = [];
+
+      const entry = {
+        id: Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
+        name: name.trim(),
+        meal,
+        calories: Math.round(Number(calories) || 0),
+        protein: Number((Number(protein) || 0).toFixed(1)),
+        carbs: Number((Number(carbs) || 0).toFixed(1)),
+        fats: Number((Number(fats) || 0).toFixed(1)),
+        fiber: Number((Number(fiber) || 0).toFixed(1)),
+        timestamp: new Date().toISOString()
+      };
+
+      state.logs[key].push(entry);
+      saveLogs();
+      renderDashboard();
+      renderMeals();
+      showToast(`Added ${entry.name} (${entry.calories} kcal)`);
+    }
+
+    function deleteFoodEntry(entryId) {
+      const key = getDateKey(state.selectedDateOffset);
+      if (!state.logs[key]) return;
+
+      const target = state.logs[key].find(item => item.id === entryId);
+      state.logs[key] = state.logs[key].filter(item => item.id !== entryId);
+      saveLogs();
+      renderDashboard();
+      renderMeals();
+      if (target) showToast(`Removed ${target.name}`);
+    }
+
+    function clearSelectedDay() {
+      const key = getDateKey(state.selectedDateOffset);
+      state.logs[key] = [];
+      saveLogs();
+      renderDashboard();
+      renderMeals();
+      showToast(`Cleared entries for ${formatDateLabel(state.selectedDateOffset)}`);
+    }
+
+    // =========================================================================
+    // 4. RENDERING FUNCTIONS
+    // =========================================================================
+    function renderDashboard() {
+      const entries = getCurrentEntries();
+      const totals = entries.reduce((acc, item) => {
+        acc.calories += Number(item.calories) || 0;
+        acc.protein += Number(item.protein) || 0;
+        acc.carbs += Number(item.carbs) || 0;
+        acc.fats += Number(item.fats) || 0;
+        acc.fiber += Number(item.fiber) || 0;
+        return acc;
+      }, { calories: 0, protein: 0, carbs: 0, fats: 0, fiber: 0 });
+
+      const goalCal = state.goals.calories;
+      const remaining = goalCal - totals.calories;
+      const isOver = remaining < 0;
+
+      document.getElementById('consumed-calories').textContent = Math.round(totals.calories).toLocaleString();
+      document.getElementById('target-calories-display').textContent = goalCal.toLocaleString();
+      document.getElementById('goal-pill-text').textContent = `Goal: ${goalCal.toLocaleString()} kcal`;
+
+      const remEl = document.getElementById('remaining-calories');
+      const remLabelEl = document.getElementById('remaining-label');
+      remEl.textContent = Math.abs(Math.round(remaining)).toLocaleString();
+
+      if (isOver) {
+        remEl.className = 'text-3xl font-extrabold tracking-tight text-rose-500';
+        remLabelEl.textContent = 'kcal over';
+      } else {
+        remEl.className = 'text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white';
+        remLabelEl.textContent = 'kcal left';
+      }
+
+      const badgeEl = document.getElementById('motivational-badge');
+      const pct = goalCal > 0 ? (totals.calories / goalCal) * 100 : 0;
+      if (totals.calories === 0) {
+        badgeEl.textContent = 'Ready to fuel your day!';
+        badgeEl.className = 'text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-0.5';
+      } else if (pct < 50) {
+        badgeEl.textContent = 'Great start! Keep nourishing your body.';
+        badgeEl.className = 'text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-0.5';
+      } else if (pct <= 100) {
+        badgeEl.textContent = 'Right on track! Strong consistency today.';
+        badgeEl.className = 'text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-0.5';
+      } else {
+        badgeEl.textContent = 'Slightly over target — stay hydrated!';
+        badgeEl.className = 'text-xs text-amber-600 dark:text-amber-400 font-medium mt-0.5';
+      }
+
+      const circumference = 477.52;
+      const clampedRatio = Math.min(Math.max(totals.calories / Math.max(goalCal, 1), 0), 1);
+      const offset = circumference - clampedRatio * circumference;
+      const ringEl = document.getElementById('calorie-ring-progress');
+      ringEl.style.strokeDashoffset = offset;
+
+      if (isOver) {
+        ringEl.classList.remove('stroke-emerald-500');
+        ringEl.classList.add('stroke-rose-500');
+      } else {
+        ringEl.classList.remove('stroke-rose-500');
+        ringEl.classList.add('stroke-emerald-500');
+      }
+
+      updateMacroBar('protein', totals.protein, state.goals.protein);
+      updateMacroBar('carbs', totals.carbs, state.goals.carbs);
+      updateMacroBar('fats', totals.fats, state.goals.fats);
+      updateMacroBar('fiber', totals.fiber, state.goals.fiber || DEFAULT_GOALS.fiber);
+
+      const macroCalories = Math.round((totals.protein * 4) + (totals.carbs * 4) + (totals.fats * 9));
+      document.getElementById('macro-kcal-total').textContent = `${macroCalories.toLocaleString()} kcal from macros`;
+      document.getElementById('total-items-badge').textContent = `${entries.length} ${entries.length === 1 ? 'item' : 'items'} logged`;
+    }
+
+    function updateMacroBar(macro, consumed, target) {
+      const roundedConsumed = Number(consumed.toFixed(1));
+      document.getElementById(`${macro}-consumed`).textContent = `${roundedConsumed}g`;
+      document.getElementById(`${macro}-target`).textContent = target;
+      const pct = Math.min((consumed / Math.max(target, 1)) * 100, 100);
+      document.getElementById(`${macro}-bar`).style.width = `${pct}%`;
+    }
+
+    function renderQuickAddLibrary() {
+      const listEl = document.getElementById('quick-add-list');
+      const query = state.searchQuery.toLowerCase().trim();
+
+      const filtered = QUICK_ADD_FOODS.filter(item => {
+        const matchesCategory = state.activeCategory === 'All' || item.category === state.activeCategory;
+        const matchesSearch = item.name.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `
+          <div class="text-center py-6 text-xs text-slate-400">
+            No matching foods found. Use the custom logger above!
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(item => `
+        <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 transition">
+          <div class="min-w-0 flex-1">
+            <p class="text-sm font-semibold text-slate-900 dark:text-white leading-snug">${escapeHTML(item.name)}</p>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">${item.calories} kcal</span>
+              <span class="text-blue-600 dark:text-blue-400 font-medium">P ${item.protein}g</span>
+              <span class="text-amber-600 dark:text-amber-400 font-medium">C ${item.carbs}g</span>
+              <span class="text-rose-600 dark:text-rose-400 font-medium">F ${item.fats}g</span>
+              <span class="text-teal-600 dark:text-teal-400 font-medium">Fib ${item.fiber ?? 0}g</span>
+            </div>
+          </div>
+          <button type="button" data-quick-id="${item.id}"
+            class="quick-add-btn shrink-0 px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-semibold transition flex items-center gap-1 shadow-sm">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"/><path d="M12 5v14"/>
+            </svg>
+            <span>Add</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function renderMeals() {
+      const container = document.getElementById('meals-container');
+      const entries = getCurrentEntries();
+
+      container.innerHTML = MEAL_CONFIG.map(mealObj => {
+        const mealEntries = entries.filter(e => e.meal === mealObj.name);
+        const mealCalories = mealEntries.reduce((sum, item) => sum + item.calories, 0);
+
+        const itemsHTML = mealEntries.length === 0
+          ? `<div class="py-5 text-center text-xs text-slate-400 border-t border-dashed border-slate-200 dark:border-slate-800">
+               No foods logged for ${mealObj.name.toLowerCase()} yet.
+             </div>`
+          : `<div class="divide-y divide-slate-100 dark:divide-slate-800 border-t border-slate-100 dark:border-slate-800">
+               ${mealEntries.map(item => `
+                 <div class="py-3 flex items-center justify-between gap-3 group">
+                   <div class="min-w-0">
+                     <p class="text-sm font-semibold truncate">${escapeHTML(item.name)}</p>
+                     <div class="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                       <span class="px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-medium">P: ${item.protein}g</span>
+                       <span class="px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 font-medium">C: ${item.carbs}g</span>
+                       <span class="px-1.5 py-0.5 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 font-medium">F: ${item.fats}g</span>
+                       <span class="px-1.5 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 font-medium">Fib: ${item.fiber ?? 0}g</span>
+                     </div>
+                   </div>
+                   <div class="flex items-center gap-3 shrink-0">
+                     <span class="text-sm font-bold">${item.calories} <span class="text-xs font-normal text-slate-400">kcal</span></span>
+                     <button type="button" data-delete-id="${item.id}" aria-label="Delete ${escapeHTML(item.name)}"
+                       class="delete-entry-btn p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition">
+                       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                         <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                       </svg>
+                     </button>
+                   </div>
+                 </div>
+               `).join('')}
+             </div>`;
+
+        return `
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl ${mealObj.bg} ${mealObj.accent} flex items-center justify-center">
+                  ${MEAL_ICONS[mealObj.name]}
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold">${mealObj.name}</h3>
+                  <p class="text-[11px] text-slate-400">${mealEntries.length} ${mealEntries.length === 1 ? 'item' : 'items'}</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">${mealCalories} kcal</span>
+              </div>
+            </div>
+            ${itemsHTML}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateDateUI() {
+      document.getElementById('current-date-label').textContent = formatDateLabel(state.selectedDateOffset);
+      renderDashboard();
+      renderMeals();
+    }
+
+    function updateThemeIcons() {
+      const isDark = document.documentElement.classList.contains('dark');
+      document.getElementById('theme-icon-sun').classList.toggle('hidden', !isDark);
+      document.getElementById('theme-icon-moon').classList.toggle('hidden', isDark);
+    }
+
+    // =========================================================================
+    // 5. EVENT LISTENERS
+    // =========================================================================
+    function bindEvents() {
+      // Theme Toggle
+      document.getElementById('theme-toggle-btn').addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem(STORAGE_KEYS.THEME, isDark ? 'dark' : 'light');
+        updateThemeIcons();
+      });
+
+      // Date Navigation
+      document.getElementById('prev-date-btn').addEventListener('click', () => {
+        state.selectedDateOffset -= 1;
+        updateDateUI();
+      });
+
+      document.getElementById('next-date-btn').addEventListener('click', () => {
+        state.selectedDateOffset += 1;
+        updateDateUI();
+      });
+
+      // Custom Food Form Submission
+      document.getElementById('custom-food-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('food-name').value;
+        const meal = document.getElementById('food-meal').value;
+        const calories = document.getElementById('food-calories').value;
+        const protein = document.getElementById('food-protein').value;
+        const carbs = document.getElementById('food-carbs').value;
+        const fats = document.getElementById('food-fats').value;
+        const fiber = document.getElementById('food-fiber').value;
+
+        if (!name.trim()) return;
+
+        addFoodEntry({ name, meal, calories, protein, carbs, fats, fiber });
+
+        document.getElementById('food-name').value = '';
+        document.getElementById('food-calories').value = '';
+        document.getElementById('food-protein').value = '';
+        document.getElementById('food-carbs').value = '';
+        document.getElementById('food-fats').value = '';
+        document.getElementById('food-fiber').value = '';
+      });
+
+      // Quick-Add Search & Category Filtering
+      document.getElementById('quick-search').addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        renderQuickAddLibrary();
+      });
+
+      document.getElementById('category-filters').addEventListener('click', (e) => {
+        const btn = e.target.closest('.cat-btn');
+        if (!btn) return;
+        state.activeCategory = btn.dataset.cat;
+
+        document.querySelectorAll('.cat-btn').forEach(b => {
+          b.className = 'cat-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0';
+        });
+        btn.className = 'cat-btn active px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white shrink-0';
+        renderQuickAddLibrary();
+      });
+
+      // Quick-Add Click Handler
+      document.getElementById('quick-add-list').addEventListener('click', (e) => {
+        const btn = e.target.closest('.quick-add-btn');
+        if (!btn) return;
+        const food = QUICK_ADD_FOODS.find(f => f.id === btn.dataset.quickId);
+        if (!food) return;
+
+        const chosenMeal = document.getElementById('quick-add-meal').value;
+        addFoodEntry({
+          name: food.name,
+          meal: chosenMeal,
+          calories: food.calories,
+          protein: food.protein,
+          carbs: food.carbs,
+          fats: food.fats,
+          fiber: food.fiber ?? 0
+        });
+      });
+
+      // Delete Entry Handler
+      document.getElementById('meals-container').addEventListener('click', (e) => {
+        const btn = e.target.closest('.delete-entry-btn');
+        if (!btn) return;
+        deleteFoodEntry(btn.dataset.deleteId);
+      });
+
+      // Goals Modal Controls (Top Set Goals button + Goal pill + Daily Target card)
+      const goalsModal = document.getElementById('goals-modal');
+      const openGoalsModal = () => {
+        document.getElementById('goal-calories-input').value = state.goals.calories;
+        document.getElementById('goal-protein-input').value = state.goals.protein;
+        document.getElementById('goal-carbs-input').value = state.goals.carbs;
+        document.getElementById('goal-fats-input').value = state.goals.fats;
+        document.getElementById('goal-fiber-input').value = state.goals.fiber ?? DEFAULT_GOALS.fiber;
+        goalsModal.classList.remove('hidden');
+        goalsModal.classList.add('flex');
+      };
+      const closeGoalsModal = () => {
+        goalsModal.classList.add('hidden');
+        goalsModal.classList.remove('flex');
+      };
+
+      document.getElementById('open-goals-btn').addEventListener('click', openGoalsModal);
+      document.getElementById('goal-pill-btn').addEventListener('click', openGoalsModal);
+      document.getElementById('daily-target-card-btn').addEventListener('click', openGoalsModal);
+      document.getElementById('close-goals-btn').addEventListener('click', closeGoalsModal);
+      document.getElementById('cancel-goals-btn').addEventListener('click', closeGoalsModal);
+
+      // Close modal when tapping backdrop
+      goalsModal.addEventListener('click', (e) => {
+        if (e.target === goalsModal) closeGoalsModal();
+      });
+
+      // Goal Presets
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const type = btn.dataset.preset;
+          const presets = {
+            cut: { calories: 1650, protein: 145, carbs: 155, fats: 50, fiber: 28 },
+            maintain: { calories: 2000, protein: 150, carbs: 225, fats: 65, fiber: 30 },
+            bulk: { calories: 2600, protein: 180, carbs: 310, fats: 72, fiber: 38 }
+          };
+          const selected = presets[type];
+          if (selected) {
+            document.getElementById('goal-calories-input').value = selected.calories;
+            document.getElementById('goal-protein-input').value = selected.protein;
+            document.getElementById('goal-carbs-input').value = selected.carbs;
+            document.getElementById('goal-fats-input').value = selected.fats;
+            document.getElementById('goal-fiber-input').value = selected.fiber;
+          }
+        });
+      });
+
+      document.getElementById('goals-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        state.goals = {
+          calories: Math.max(500, Number(document.getElementById('goal-calories-input').value) || 2000),
+          protein: Math.max(10, Number(document.getElementById('goal-protein-input').value) || 150),
+          carbs: Math.max(10, Number(document.getElementById('goal-carbs-input').value) || 225),
+          fats: Math.max(10, Number(document.getElementById('goal-fats-input').value) || 65),
+          fiber: Math.max(5, Number(document.getElementById('goal-fiber-input').value) || 30)
+        };
+        saveGoals();
+        renderDashboard();
+        closeGoalsModal();
+        showToast('Daily goals updated!');
+      });
+
+      // Clear Day Confirmation Modal
+      const confirmModal = document.getElementById('confirm-modal');
+      document.getElementById('reset-day-btn').addEventListener('click', () => {
+        if (getCurrentEntries().length === 0) {
+          showToast('No entries to clear for this day.', 'error');
+          return;
+        }
+        document.getElementById('confirm-modal-text').textContent =
+          `This will remove all logged meals for ${formatDateLabel(state.selectedDateOffset)}. This action cannot be undone.`;
+        confirmModal.classList.remove('hidden');
+        confirmModal.classList.add('flex');
+      });
+
+      document.getElementById('confirm-cancel-btn').addEventListener('click', () => {
+        confirmModal.classList.add('hidden');
+        confirmModal.classList.remove('flex');
+      });
+
+      document.getElementById('confirm-proceed-btn').addEventListener('click', () => {
+        clearSelectedDay();
+        confirmModal.classList.add('hidden');
+        confirmModal.classList.remove('flex');
+      });
+    }
+
+    // =========================================================================
+    // 6. INITIALIZE APP
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      bindEvents();
+      renderQuickAddLibrary();
+      updateDateUI();
+    });
+  </script>
+</body>
+</html>
+```
+
 
          
